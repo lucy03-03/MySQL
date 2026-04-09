@@ -1,0 +1,174 @@
+-- ProgramFiles/MySQL/SQL Server/bin .exe => 3306
+
+-- FIRST SELECT
+SELECT * FROM dim_customer;
+
+-- INDENTATION
+-- LIMIT
+SELECT 
+	customer_id,
+	email 
+FROM 
+	dim_customer
+LIMIT 20;
+
+
+-- WHERE (CONDITION)
+-- LEVEL 1
+SELECT * FROM dim_customer;
+
+SELECT
+	* 
+FROM
+    dim_customer
+WHERE 
+	(GENDER = 'F') AND (COUNTRY = 'FRANCE') AND (join_date > '2022-01-01');
+-- pruning means when u want to filter out your data
+-- ONLY 1 WHERE CLAUSE
+
+
+-- LEVEL 2 (AND/OR)
+SELECT
+	* 
+FROM
+    dim_customer
+WHERE 
+	(GENDER = 'F') AND ((COUNTRY = 'FRANCE') OR (join_date > '2022-01-01'));
+-- 2 CONDITIONS GENDER AND COUNTRY+JOINDATE
+
+
+-- LIKE
+
+-- LEVEL 1
+SELECT
+	*
+FROM
+	dim_customer
+WHERE
+	first_name LIKE 'T%';
+    
+-- LEVEL 2
+SELECT
+	*
+FROM
+	dim_customer
+WHERE
+	first_name LIKE 'T__F%Y';
+
+
+
+-- SORTING
+SELECT * FROM dim_product;
+
+-- DEFAULT ASC 
+SELECT 
+	* 
+FROM 
+	dim_product
+ORDER BY
+	unit_price;
+
+-- DESC DESCENDING ORDER
+SELECT 
+	* 
+FROM 
+	dim_product
+ORDER BY
+	unit_price DESC;
+
+-- ASC ASCENDING ORDER
+SELECT 
+	* 
+FROM 
+	dim_product
+ORDER BY
+	unit_price ASC;
+
+-- SORTING 3 MOST EXPENSIVE
+SELECT 
+	* 
+FROM 
+	dim_product
+ORDER BY
+	unit_price DESC
+LIMIT 3;
+
+
+-- ALIAS
+SELECT 
+	product_key,
+    product_id,
+    product_name AS 'product name',
+    category
+FROM
+	dim_product;
+    
+-- GROUPING
+
+SELECT * FROM dim_product;
+
+-- level 1
+SELECT 
+	category,
+    avg(unit_price) as avg_price,
+    sum(unit_price) as total_price
+FROM
+	dim_product
+GROUP BY 
+	category;
+
+-- level 2
+SELECT 
+	category,
+    avg(unit_price) as avg_price,
+    sum(unit_price) as total_price
+FROM
+	dim_product
+GROUP BY 
+	category
+HAVING 
+	avg_price > 500;
+
+
+-- execution flow => better queries
+-- WRONG!!!!!!!!!!
+-- JUST DONE <3333333
+SELECT * FROM dim_product;
+
+SELECT
+	category, 
+    BRAND,
+    avg(unit_price) as avg_price
+FROM
+	dim_product
+WHERE
+	BRAND = 'BRANDC'
+GROUP BY
+	category
+HAVING
+	avg_price > 400
+    
+-- SO: 1 from, 2 where, 3 group by, 4 having, 5 select, 6 order by, 7 limit
+-- WRONG!!!!!!!!!!!
+-- JUST DONE PERFECT <3333333
+
+
+
+
+-- JOINS
+-- JOINS 2 TABLES
+
+-- INNER JOIN: điểm giao nhau
+
+-- LEFT JOIN: ALL THE RECORDS FROM THE LEFT TABLE NO MATTER 
+-- WHETHER THE RECORDS ARE IN THE OTHER TABLE OR NOT
+
+-- RIGHT JOIN
+-- REVERSE TO LEFT JOIN
+-- LEFT JOIN IS POPULAR
+
+-- FULL JOIN: ALL THE DATA
+-- HAVING NULL, MANY NULL
+
+
+-- NEXT TO CHAP 4
