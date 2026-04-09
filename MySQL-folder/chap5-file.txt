@@ -1,0 +1,86 @@
+-- TRANSFORMATIONS
+
+-- NUMERIC TRANSFORMATIONS
+SELECT * FROM dim_product;
+
+SELECT
+	unit_price * 0.90 AS DISCOUNTED_PRICE,
+    unit_price + 10 AS TAXED_PRICE,
+    unit_price / 10 AS FRACTIONED_PRICE,
+    ROUND(unit_price,1) AS ROUNDED_PRICE,
+    unit_price * unit_price AS MULTIPLY_PRICE
+FROM 
+	dim_product;
+    
+-- DATE TRANSFORMATION
+SELECT * FROM dim_date;
+
+-- LEVEL 1
+-- UTC IS GENERIC, DIFFERENCE BETWEEN TIMESTAMPS
+SELECT 
+	DATE,
+    NOW() AS 'CURRENT_TIMESTAMP',
+    utc_date(),
+    utc_timestamp()
+FROM 
+	dim_date;
+
+-- LEVEL 2
+-- EXTRACTION
+SELECT 
+	DATE,
+    YEAR(DATE),
+    MONTH(DATE),
+    DAY(DATE),
+    WEEKDAY(DATE),
+    DAYNAME(DATE),
+    DATEDIFF(DATE(utc_timestamp()),DATE) AS TOTAL_DAYS,
+    ADDDATE(DATE,2),
+    subdate(DATE,2),
+    CAST('2025-01-01' AS datetime)
+FROM 
+	dim_date;
+
+-- CAST TURN STRING INTO INTERGER
+-- YOUR BOSS WANT TO SEE THE NUMBER OF DATE BEOFORE LAUNCH NEW PRODUCT
+
+-- LEVEL 3
+select 
+	DATE,
+    date_format(DATE,"%W %M %e %Y") AS CONVERTED_DATE
+FROM
+	dim_date;
+-- MANY PATTERNS FOR DATE FORMAT
+-- AI ERA SO DON'T LIKE A MACHINE
+
+-- TYPE CASTING
+select 
+	CUSTOMER_KEY,
+    CAST(customer_key AS CHAR(100))
+FROM
+	dim_customer;
+    
+
+-- STRING FUNCTIONS
+-- QUESTION: CAN U GIVE SOME DATA WITH TRANSFORMATIONS?
+-- CONCAT FUNCTION COMBINE 
+-- LENGTH 
+select * FROM dim_customer;
+
+SELECT
+	*,
+	CONCAT(FIRST_NAME,' ',LAST_NAME) AS FULL_NAME,
+    concat_ws(' ',first_name,last_name,country),
+    LENGTH(COUNTRY) AS COUNTRY_SIZE,
+    lower(CITY),
+    substring(EMAIL,1,6),
+    replace(EMAIL,'@','%'),
+    LEFT(COUNTRY,3),
+    RIGHT(COUNTRY,3),
+    reverse(COUNTRY),
+    REPEAT(first_name,2)
+FROM
+	dim_customer;
+    
+-- SUBSTRING MAKE SUBSTRING IN A STRING WITH NUMBER OF STRING CHOSEN
+-- SPACE BETWEEN 5 COLLUMNS USE CONCAT_WS
