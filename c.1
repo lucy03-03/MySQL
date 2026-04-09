@@ -1,0 +1,66 @@
+-- Create Database 
+create database sales;
+
+-- Create Table
+create table sales.stores
+(
+	store_id int,
+    store_name varchar(200)
+);
+
+-- Insert Some Records
+insert into sales.stores
+values
+(1,"store_xyz"),
+(2,"store_abc");
+
+insert into sales.stores(store_id)
+values
+(3);
+
+-- Create Table, unique(store ID unique everytime), not null
+create table sales.stores_new
+(
+	store_id int unique,
+    store_name varchar(200) not null 
+);
+
+-- insert some data, not null so (3) is null -> false
+insert into sales.stores_new(store_id, store_name)
+values
+(1,"store_xyz");
+
+-- Drop and truncate 
+-- Drop delete all table, truncate delete data not table
+truncate table sales.stores;
+
+-- Alter command 
+-- Can't add column in command "create", instead use alter command
+
+-- Create Table
+create table sales.stores_new
+(
+	store_id int unique,
+    store_name varchar(200) not null 
+);
+
+-- insert some data
+insert into sales.stores_new
+values
+(1,"store_xyz");
+
+-- alter command
+alter table sales.stores_new
+add column store_city varchar(200);
+
+alter table sales.stores_new
+rename column store_city to store_location;
+
+-- SO STRUCTURE TABLE NOT DATA
+-- FOCUS ON DML DQL
+
+
+
+
+
+
